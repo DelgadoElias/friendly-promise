@@ -25,7 +25,7 @@ jobs:
         run: npm ci --force
 
       - name: Build Angular app
-        run: npm run build -- --configuration=production --base-href /<nombre-del-repo>/
+        run: npm run build -- --configuration=production --base-href /friendly-promise/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
