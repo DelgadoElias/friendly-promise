@@ -161,4 +161,6 @@ Pull requests and ideas are welcome! Feel free to fork and submit a PR or open a
 
 ---
 
-Made with ❤️ by DelgadoElias
+Made with ❤️ by 
+
+GLHF
