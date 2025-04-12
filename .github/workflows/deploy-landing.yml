@@ -1,4 +1,4 @@
-name: Deploy Angular to GitHub Pages
+name: Build and Deploy
 
 on:
   push:
@@ -6,29 +6,32 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./landing
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v1
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '20.x'
 
-      - name: Install dependencies
-        run: npm ci --force
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
 
-      - name: Build Angular app
-        run: npm run build -- --configuration=production --base-href /friendly-promise/
+    - name: Install and Build
+      working-directory: landing
+      run: |
+        npm install --force
+        npm run deploy
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./landing/dist/landing/browser
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: landing/dist/angular-ci-cd
