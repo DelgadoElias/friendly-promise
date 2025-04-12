@@ -2,9 +2,15 @@
   "name": "friendly-promise",
   "version": "1.0.0",
   "description": "An alternative way to undersand promises. Learning by doing",
-  "main": "dist/index.mjs",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",  
+      "require": "./dist/index.js"   
+    }
+  },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "test": "jest"
