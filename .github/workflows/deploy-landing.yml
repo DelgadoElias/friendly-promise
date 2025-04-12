@@ -22,7 +22,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --force
 
       - name: Build Angular app
         run: npm run build -- --configuration=production --base-href /<nombre-del-repo>/
