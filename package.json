@@ -1,6 +1,6 @@
 {
   "name": "friendly-promise",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An alternative way to undersand promises. Learning by doing",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
